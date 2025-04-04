@@ -16,6 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.*
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.painterResource
 import quiz.composeapp.generated.resources.Res
 import quiz.composeapp.generated.resources.photo_cv
@@ -29,8 +36,9 @@ import com.example.quiz.interests
 import com.example.quiz.languages
 import com.example.quiz.strengths
 
+// Consignes : avoir des dataclass avec les données du CV (contienennt le header, description, etc)
+// Utiliser des composants
 
-// avoir des dataclass avec les données du CV (contienennt le header, description, etc)
 @Composable
 fun Image(){
     Image(
@@ -74,6 +82,14 @@ fun Header(data: HeaderData) {
 @Composable
 fun Description(paragraphs: List<String>) {
     Column {
+        Row() {
+            Text("Qui suis-je ?", style = MaterialTheme.typography.h6, fontWeight = FontWeight.Bold)
+            Icon(
+                Icons.Filled.Face,
+                contentDescription = "Interrogation Icone",
+                modifier = Modifier.padding(start = 8.dp)
+            )
+        }
         paragraphs.forEach {
             Text(it)
             Spacer(modifier = Modifier.height(8.dp))
@@ -95,11 +111,18 @@ fun Skills() {
             CompositionLocalProvider(LocalContentColor provides Color.White) {
                 Column {
                     Image()
-                    Text("Compétences", style = MaterialTheme.typography.h6)
+                    Row(){
+                        Text("Compétences", style = MaterialTheme.typography.h6)
+                        Icon(
+                            Icons.Filled.Star,
+                            contentDescription = "Compétences Icone",
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
                     Spacer(Modifier.height(8.dp))
 
                     if (isMobile) {
-                        // Répartition en 2 colonnes sur mobile
+                        // Version Mobile
                         Row(modifier = Modifier.fillMaxWidth()) {
                             val half = skillsList.size / 2 + skillsList.size % 2
                             val left = skillsList.take(half)
@@ -122,7 +145,7 @@ fun Skills() {
                             }
                         }
                     } else {
-                        // Affichage en 1 colonne sur desktop
+                        // Version Dekstop
                         skillsList.forEach { category ->
                             Text(category.title, style = MaterialTheme.typography.subtitle1)
                             category.items.forEach { item -> Text("• $item") }
@@ -150,16 +173,32 @@ fun Experiences() {
             Spacer(Modifier.height(8.dp))
             LigneDesign(color = Color(0xFF425365))
             Spacer(Modifier.height(8.dp))
-            Text("Expériences", style = MaterialTheme.typography.h6)
+            Row() {
+                Text("Expériences", style = MaterialTheme.typography.h6)
+                Icon(
+                    Icons.Filled.Build,
+                    contentDescription = "Formation Icone",
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
             Spacer(Modifier.height(8.dp))
             experiencesList.forEach {
-                Text(it.title, style = MaterialTheme.typography.subtitle1)
+                Text(it.title, style = MaterialTheme.typography.subtitle1, fontWeight = FontWeight.Bold)
                 Text(it.description)
                 Spacer(Modifier.height(16.dp))
             }
 
             Spacer(Modifier.height(16.dp))
-            Text("Formations", style = MaterialTheme.typography.h6)
+
+            Row(){
+                Text("Formations", style = MaterialTheme.typography.h6)
+                Icon(
+                    Icons.Filled.Info,
+                    contentDescription = "Formation Icone",
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+
             Spacer(Modifier.height(8.dp))
             formationsList.forEach {
                 Text(it.title)
