@@ -171,7 +171,7 @@ fun Experiences() {
         Column {
             Description(paragraphs = descriptionText)
             Spacer(Modifier.height(8.dp))
-            LigneDesign(color = Color(0xFF425365))
+            LigneDesign(color = Color(red = 66, green = 83, blue = 101))
             Spacer(Modifier.height(8.dp))
             Row() {
                 Text("Expériences", style = MaterialTheme.typography.h6)
@@ -185,11 +185,11 @@ fun Experiences() {
             experiencesList.forEach {
                 Text(it.title, style = MaterialTheme.typography.subtitle1, fontWeight = FontWeight.Bold)
                 Text(it.description)
-                Spacer(Modifier.height(16.dp))
             }
 
             Spacer(Modifier.height(16.dp))
-
+            LigneDesign(color = Color(red = 66, green = 83, blue = 101))
+            Spacer(Modifier.height(16.dp))
             Row(){
                 Text("Formations", style = MaterialTheme.typography.h6)
                 Icon(
